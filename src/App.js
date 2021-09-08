@@ -1,24 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import { DarkTheme, LightTheme } from './styles';
+import { ThemeContext, ThemeProvider } from 'styled-components';
+import { useState } from 'react';
+import { ThemeToggler } from './components/ThemeToggler';
 
 function App() {
+  const [theme, toggleTheme] = useState('light');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <ThemeProvider theme={theme === 'light' ? LightTheme : DarkTheme}>
+        <ThemeToggler />
+      </ThemeProvider>
+    </ThemeContext.Provider>
   );
 }
 
